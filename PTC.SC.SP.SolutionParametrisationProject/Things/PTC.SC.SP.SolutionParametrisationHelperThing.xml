@@ -1,0 +1,863 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Entities
+ build="b222"
+ majorVersion="8"
+ minorVersion="5"
+ modelPersistenceProviderPackage="PostgresPersistenceProviderPackage"
+ revision="4"
+ schemaVersion="1053"
+ universal="password">
+    <Things>
+        <Thing
+         description="&#xA;"
+         documentationContent="&lt;p&gt;Es gibt im &lt;strong&gt;PTC.SC.SP.SolutionParametrisationHelperThing &lt;/strong&gt;zwei Services:&amp;nbsp;&lt;/p&gt;&#xA;&#xA;&lt;ol&gt;&lt;li&gt;&lt;strong&gt;ExtractConfiguration &lt;/strong&gt;mit input params:&amp;nbsp;&amp;nbsp;&lt;ol&gt;&lt;li&gt;&lt;strong&gt;Thing&lt;/strong&gt;: Thing von dem die Konfigurationen und Properties kopiert werden sollen&amp;nbsp;&lt;/li&gt;&lt;li&gt;&lt;strong&gt;readProperties&lt;/strong&gt;: Boolean, der angibt ob Properties oder Konfigurationen gelesen werden sollen. &lt;br&gt;&lt;br&gt;Dieser Service liest die Konfigurations oder DeployConfig Properties des angegebenen Things und speichert sie in der Property &lt;strong&gt;DeploymentProperties &lt;/strong&gt;des &lt;strong&gt;PTC.SC.SP.SolutionParametrisationHelperThing&lt;/strong&gt;, einmal pro &lt;strong&gt;DeployType&lt;/strong&gt;.&amp;nbsp;&#xA;Über &lt;em&gt;Edit Property Value&lt;/em&gt; können diese Properties nachbearbeitet werden. Üblicherweise müssen Konfigurations-Properties gelöscht werden und Werte für bestimmte DeployTypen geändert werden.&amp;nbsp;&lt;/li&gt;&lt;/ol&gt;&lt;/li&gt;&lt;li&gt;&lt;strong&gt;ApplyConfiguration &lt;/strong&gt;mit Input Param:&amp;nbsp;&lt;ol&gt;&lt;li&gt;&lt;strong&gt;DeployType&lt;/strong&gt;: einer der Werte aus der Property DeployTypes (by default Dev,Test,Prod), der angibt, welches Subset der Properties genutzt werden soll.&amp;nbsp;&lt;/li&gt;&lt;/ol&gt;&lt;/li&gt;&lt;/ol&gt;&#xA;&#xA;&lt;p&gt;Es gibt im &lt;strong&gt;PTC.SC.SP.SolutionParametrisationHelperThing &lt;/strong&gt;zwei Properties:&amp;nbsp;&lt;/p&gt;&#xA;&#xA;&lt;ol&gt;&lt;li&gt;&lt;strong&gt;DeploymentProperties&lt;/strong&gt; hält und speichert die Konfigurations-Properties. Hier können diese auch manuell nachbearbeitet werden&lt;/li&gt;&lt;li&gt;&lt;strong&gt;DeployTypes&lt;/strong&gt; hält die Liste der Deployment      Typen. Für jeden wird bei&amp;nbsp;&lt;strong&gt;ExtractConfiguration&amp;nbsp;&lt;/strong&gt;ein Satz Konfigurations-Properties angelegt und bei      &lt;strong&gt;ApplyConfiguration &lt;/strong&gt;muss einer dieser Deploy-Types angegeben werden.&lt;strong&gt;&lt;/strong&gt;&lt;br&gt;&#xA; &lt;/li&gt;&lt;/ol&gt;"
+         effectiveThingPackage="ConfiguredThing"
+         enabled="true"
+         homeMashup="PTC.SC.SP.SolutionParametrisationMashup"
+         identifier=""
+         lastModifiedDate="2021-01-14T12:15:12.512Z"
+         name="PTC.SC.SP.SolutionParametrisationHelperThing"
+         projectName="PTC.SC.SP.SolutionParametrisationProject"
+         published="false"
+         tags=""
+         thingTemplate="GenericThing"
+         valueStream="">
+            <avatar></avatar>
+            <DesignTimePermissions>
+                <Create></Create>
+                <Read></Read>
+                <Update></Update>
+                <Delete></Delete>
+                <Metadata></Metadata>
+            </DesignTimePermissions>
+            <RunTimePermissions></RunTimePermissions>
+            <VisibilityPermissions>
+                <Visibility></Visibility>
+            </VisibilityPermissions>
+            <ConfigurationTableDefinitions>
+                <ConfigurationTableDefinition
+                 category="DeployConfig"
+                 dataShapeName="PTC.SC.SP.DeployConfigSetupDataShape"
+                 description=""
+                 isHidden="false"
+                 isMultiRow="false"
+                 name="DeployConfigSetup"
+                 ordinal="0"
+                 source="IMPORT"></ConfigurationTableDefinition>
+            </ConfigurationTableDefinitions>
+            <ConfigurationTables>
+                <ConfigurationTable
+                 description=""
+                 isMultiRow="false"
+                 name="DeployConfigSetup"
+                 ordinal="0">
+                    <DataShape>
+                        <FieldDefinitions>
+                            <FieldDefinition
+                             aspect.isPrimaryKey="true"
+                             baseType="STRING"
+                             description="comma-separated list of Deployment Types or target systems that need a different set of configuration values, e.g. Dev,Test,Prod"
+                             name="DeployTypes"
+                             ordinal="1"></FieldDefinition>
+                            <FieldDefinition
+                             aspect.isPrimaryKey="false"
+                             baseType="STRING"
+                             description=""
+                             name="MyDeployType"
+                             ordinal="2"></FieldDefinition>
+                        </FieldDefinitions>
+                    </DataShape>
+                    <Rows>
+                        <Row>
+                            <DeployTypes>
+                            <![CDATA[
+                            Dev,Test,Int,Prod
+                            ]]>
+                            </DeployTypes>
+                            <MyDeployType>
+                            <![CDATA[
+                            Dev
+                            ]]>
+                            </MyDeployType>
+                        </Row>
+                    </Rows>
+                </ConfigurationTable>
+            </ConfigurationTables>
+            <ThingShape>
+                <PropertyDefinitions></PropertyDefinitions>
+                <ServiceDefinitions>
+                    <ServiceDefinition
+                     aspect.isAsync="false"
+                     category=""
+                     description=""
+                     isAllowOverride="false"
+                     isLocalOnly="false"
+                     isOpen="false"
+                     isPrivate="false"
+                     name="ApplyConfiguration">
+                        <ResultType
+                         aspect.dataShape="PTC.SC.SP.DeployConfigParametrisationDataShape"
+                         baseType="INFOTABLE"
+                         description=""
+                         name="result"
+                         ordinal="0"></ResultType>
+                        <ParameterDefinitions>
+                            <FieldDefinition
+                             aspect.defaultValue="false"
+                             baseType="BOOLEAN"
+                             description=""
+                             name="ApplyToAllProjects"
+                             ordinal="4"></FieldDefinition>
+                            <FieldDefinition
+                             baseType="STRING"
+                             description=""
+                             name="DeployType"
+                             ordinal="1"></FieldDefinition>
+                            <FieldDefinition
+                             baseType="STRING"
+                             description=""
+                             name="encryptionKey"
+                             ordinal="2"></FieldDefinition>
+                            <FieldDefinition
+                             aspect.dataShape="BoundName"
+                             baseType="INFOTABLE"
+                             description=""
+                             name="projects"
+                             ordinal="3"></FieldDefinition>
+                        </ParameterDefinitions>
+                    </ServiceDefinition>
+                    <ServiceDefinition
+                     aspect.isAsync="false"
+                     category=""
+                     description=""
+                     isAllowOverride="false"
+                     isLocalOnly="false"
+                     isOpen="false"
+                     isPrivate="false"
+                     name="DeleteEntries">
+                        <ResultType
+                         aspect.dataShape="PTC.SC.SP.DeployConfigParametrisationDataShape"
+                         baseType="INFOTABLE"
+                         description=""
+                         name="result"
+                         ordinal="0"></ResultType>
+                        <ParameterDefinitions>
+                            <FieldDefinition
+                             aspect.dataShape="PTC.SC.SP.DeployConfigParametrisationDataShape"
+                             baseType="INFOTABLE"
+                             description=""
+                             name="entries"
+                             ordinal="1"></FieldDefinition>
+                        </ParameterDefinitions>
+                    </ServiceDefinition>
+                    <ServiceDefinition
+                     aspect.isAsync="false"
+                     category=""
+                     description=""
+                     isAllowOverride="false"
+                     isLocalOnly="false"
+                     isOpen="false"
+                     isPrivate="false"
+                     name="ExtractConfiguration">
+                        <ResultType
+                         aspect.dataShape="PTC.SC.SP.DeployConfigParametrisationDataShape"
+                         baseType="INFOTABLE"
+                         description=""
+                         name="result"
+                         ordinal="0"></ResultType>
+                        <ParameterDefinitions>
+                            <FieldDefinition
+                             baseType="STRING"
+                             description=""
+                             name="encryptionKey"
+                             ordinal="3"></FieldDefinition>
+                            <FieldDefinition
+                             baseType="STRING"
+                             description=""
+                             name="project"
+                             ordinal="4"></FieldDefinition>
+                            <FieldDefinition
+                             baseType="THINGNAME"
+                             description=""
+                             name="thing"
+                             ordinal="1"></FieldDefinition>
+                        </ParameterDefinitions>
+                    </ServiceDefinition>
+                    <ServiceDefinition
+                     aspect.isAsync="false"
+                     category=""
+                     description=""
+                     isAllowOverride="false"
+                     isLocalOnly="false"
+                     isOpen="false"
+                     isPrivate="false"
+                     name="GenerateKey">
+                        <ResultType
+                         baseType="STRING"
+                         description=""
+                         name="result"
+                         ordinal="0"></ResultType>
+                        <ParameterDefinitions></ParameterDefinitions>
+                    </ServiceDefinition>
+                    <ServiceDefinition
+                     aspect.isAsync="false"
+                     category=""
+                     description=""
+                     isAllowOverride="false"
+                     isLocalOnly="false"
+                     isOpen="false"
+                     isPrivate="false"
+                     name="GetDeployTypes">
+                        <ResultType
+                         aspect.dataShape="EntityList"
+                         baseType="INFOTABLE"
+                         description=""
+                         name="result"
+                         ordinal="0"></ResultType>
+                        <ParameterDefinitions></ParameterDefinitions>
+                    </ServiceDefinition>
+                    <ServiceDefinition
+                     aspect.isAsync="false"
+                     category=""
+                     description=""
+                     isAllowOverride="false"
+                     isLocalOnly="false"
+                     isOpen="false"
+                     isPrivate="false"
+                     name="GetMyDeployType">
+                        <ResultType
+                         baseType="STRING"
+                         description=""
+                         name="result"
+                         ordinal="0"></ResultType>
+                        <ParameterDefinitions></ParameterDefinitions>
+                    </ServiceDefinition>
+                    <ServiceDefinition
+                     aspect.isAsync="false"
+                     category=""
+                     description=""
+                     isAllowOverride="false"
+                     isLocalOnly="false"
+                     isOpen="false"
+                     isPrivate="false"
+                     name="GetProjectDecryptedConfiguration">
+                        <ResultType
+                         aspect.dataShape="PTC.SC.SP.DeployConfigParametrisationDataShape"
+                         baseType="INFOTABLE"
+                         description=""
+                         name="result"
+                         ordinal="0"></ResultType>
+                        <ParameterDefinitions>
+                            <FieldDefinition
+                             baseType="STRING"
+                             description=""
+                             name="DeployType"
+                             ordinal="1"></FieldDefinition>
+                            <FieldDefinition
+                             baseType="STRING"
+                             description=""
+                             name="encryptionKey"
+                             ordinal="2"></FieldDefinition>
+                            <FieldDefinition
+                             aspect.dataShape="BoundName"
+                             baseType="INFOTABLE"
+                             description=""
+                             name="projects"
+                             ordinal="3"></FieldDefinition>
+                            <FieldDefinition
+                             baseType="QUERY"
+                             description=""
+                             name="query"
+                             ordinal="4"></FieldDefinition>
+                        </ParameterDefinitions>
+                    </ServiceDefinition>
+                    <ServiceDefinition
+                     aspect.isAsync="false"
+                     category=""
+                     description=""
+                     isAllowOverride="false"
+                     isLocalOnly="false"
+                     isOpen="false"
+                     isPrivate="false"
+                     name="SaveChanges">
+                        <ResultType
+                         baseType="NOTHING"
+                         description=""
+                         name="result"
+                         ordinal="0"></ResultType>
+                        <ParameterDefinitions>
+                            <FieldDefinition
+                             aspect.dataShape="PTC.SC.SP.DeployConfigParametrisationDataShape"
+                             baseType="INFOTABLE"
+                             description=""
+                             name="editedEntries"
+                             ordinal="1"></FieldDefinition>
+                            <FieldDefinition
+                             baseType="STRING"
+                             description=""
+                             name="encryptionKey"
+                             ordinal="2"></FieldDefinition>
+                        </ParameterDefinitions>
+                    </ServiceDefinition>
+                    <ServiceDefinition
+                     aspect.isAsync="false"
+                     category=""
+                     description=""
+                     isAllowOverride="false"
+                     isLocalOnly="false"
+                     isOpen="false"
+                     isPrivate="false"
+                     name="SearchProjects">
+                        <ResultType
+                         aspect.dataShape="SpotlightSearch"
+                         baseType="INFOTABLE"
+                         description=""
+                         name="result"
+                         ordinal="0"></ResultType>
+                        <ParameterDefinitions>
+                            <FieldDefinition
+                             baseType="STRING"
+                             description=""
+                             name="expression"
+                             ordinal="1"></FieldDefinition>
+                        </ParameterDefinitions>
+                    </ServiceDefinition>
+                </ServiceDefinitions>
+                <EventDefinitions></EventDefinitions>
+                <ServiceMappings></ServiceMappings>
+                <ServiceImplementations>
+                    <ServiceImplementation
+                     description=""
+                     handlerName="Script"
+                     name="ApplyConfiguration">
+                        <ConfigurationTables>
+                            <ConfigurationTable
+                             description=""
+                             isMultiRow="false"
+                             name="Script"
+                             ordinal="0">
+                                <DataShape>
+                                    <FieldDefinitions>
+                                        <FieldDefinition
+                                         baseType="STRING"
+                                         description="code"
+                                         name="code"
+                                         ordinal="0"></FieldDefinition>
+                                    </FieldDefinitions>
+                                </DataShape>
+                                <Rows>
+                                    <Row>
+                                        <code>
+                                        <![CDATA[
+                                        //get relevant projects
+                                        projects = ApplyToAllProjects ? Resources["SearchFunctions"].SpotlightSearch({types: {"items": ["Project"]} }) : projects;
+                                        DeployType = DeployType ? me.GetConfigurationTable({tableName: 'DeployConfigSetup'}).MyDeployType : DeployType;
+                                        //get project-specific configs
+                                        var result = DataShapes["PTC.SC.SP.DeployConfigParametrisationDataShape"].CreateValues();
+                                        //let result = Resources.InfoTableFunctions.Clone({t1:me.DeploymentProperties});
+                                        if(projects && projects.rows && projects.rows.length>0){
+                                            for(let ii=0; ii<projects.rows.length; ii++){
+                                                try{
+                                                    let result2 = Projects[projects.rows[ii].name].GetConfigurationTable({tableName: 'DeployConfigParametrisation'});
+                                                	if(result2) result = Resources["InfoTableFunctions"].Union({t1: result, t2: result2});
+                                                }catch(e){ //skipping projects w/o config -> this is the most likely reason for an issue here
+                                                    logger.info("Skipping project: "+projects.rows[ii].name+" for reason: "+e);
+                                                    continue;
+                                                }
+                                            }
+                                        }
+                                        logger.debug("Apply these Configs: "+result.ToJSON());
+                                        //let result = Resources.InfoTableFunctions.Clone({t1:me.DeploymentProperties});
+                                        //result.Filter({DeployType:DeployType});
+                                        
+                                        for(let i=0; i<result.rows.length; i++){
+                                            let row = result.rows[i];
+                                            let thing = row.Thing;
+                                            if(row.ConfigType==='Property'){
+                                                let value = result.rows[i].Value;
+                                                if(row.PropertyBaseType==='PASSWORD'){
+                                        			value = encryptionKey ? Resources["EncryptionServices"].DecryptWithCustomKey({encryptedData: value, key: encryptionKey}) : value;
+                                        			value = Resources["EncryptionServices"].EncryptPropertyValue({data: value}); 
+                                                }
+                                                Things[thing][row.PropertyName] = value;
+                                            }
+                                            if(row.ConfigType==='Configuration'){
+                                                let value = result.rows[i].Value;
+                                                if(row.PropertyBaseType==='PASSWORD'){
+                                        			value = encryptionKey ? Resources["EncryptionServices"].DecryptWithCustomKey({encryptedData: value, key: encryptionKey}) : value;
+                                        			value = Resources["EncryptionServices"].EncryptPropertyValue({data: value}); 
+                                                }
+                                                let table =  Things[thing].GetConfigurationTable({tableName: row.ConfigTableName});
+                                                table.rows[0][row.PropertyName] = value;//TODO: for multi-row config tables this must be changed - you can't simply assume that all values are in row 0! 
+                                                //result=table;
+                                             	Things[thing].SetConfigurationTable({ 
+                                                    configurationTable: table /* INFOTABLE */,
+                                                    persistent: true /* BOOLEAN */,
+                                                    tableName: row.ConfigTableName /* STRING */
+                                                });   
+                                            }
+                                        }
+                                        ]]>
+                                        </code>
+                                    </Row>
+                                </Rows>
+                            </ConfigurationTable>
+                        </ConfigurationTables>
+                    </ServiceImplementation>
+                    <ServiceImplementation
+                     description=""
+                     handlerName="Script"
+                     name="DeleteEntries">
+                        <ConfigurationTables>
+                            <ConfigurationTable
+                             description=""
+                             isMultiRow="false"
+                             name="Script"
+                             ordinal="0">
+                                <DataShape>
+                                    <FieldDefinitions>
+                                        <FieldDefinition
+                                         baseType="STRING"
+                                         description="code"
+                                         name="code"
+                                         ordinal="0"></FieldDefinition>
+                                    </FieldDefinitions>
+                                </DataShape>
+                                <Rows>
+                                    <Row>
+                                        <code>
+                                        <![CDATA[
+                                        //figure out what changed deletedEntrieseditedEntries
+                                        //	get current config of all  
+                                        //encrypt pwds
+                                        //and save new config table
+                                        logger.debug("deleting entries: "+entries+" - "+entries.ToJSON());
+                                        var projects = Resources["InfoTableFunctions"].Distinct({t: entries,columns: 'Project'});
+                                        for(let i=0; i<projects.rows.length;i++){
+                                        	let project = projects.rows[i].Project;
+                                            let projEntries = Resources["InfoTableFunctions"].Clone({t1: entries});
+                                            projEntries.Filter({Project:project});
+                                            let conf =  Projects[project].GetConfigurationTable({tableName: 'DeployConfigParametrisation'});
+                                            for(let j=0; j<projEntries.rows.length; j++){
+                                                let pe = projEntries.rows[j];
+                                                conf.Delete({DeployType: pe.DeployType,Thing: pe.Thing, ConfigTableName: pe.ConfigTableName, PropertyName: pe.PropertyName, ConfigType: pe.ConfigType});
+                                            }
+                                            Projects[project].SetMultiRowConfigurationTable({
+                                                configurationTable: conf /* INFOTABLE */,
+                                                persistent: true /* BOOLEAN */,
+                                                tableName: 'DeployConfigParametrisation' /* STRING */
+                                            });
+                                        }
+                                        var result = DataShapes["PTC.SC.SP.DeployConfigParametrisationDataShape"].CreateValues();
+                                        ]]>
+                                        </code>
+                                    </Row>
+                                </Rows>
+                            </ConfigurationTable>
+                        </ConfigurationTables>
+                    </ServiceImplementation>
+                    <ServiceImplementation
+                     description=""
+                     handlerName="Script"
+                     name="ExtractConfiguration">
+                        <ConfigurationTables>
+                            <ConfigurationTable
+                             description=""
+                             isMultiRow="false"
+                             name="Script"
+                             ordinal="0">
+                                <DataShape>
+                                    <FieldDefinitions>
+                                        <FieldDefinition
+                                         baseType="STRING"
+                                         description="code"
+                                         name="code"
+                                         ordinal="0"></FieldDefinition>
+                                    </FieldDefinitions>
+                                </DataShape>
+                                <Rows>
+                                    <Row>
+                                        <code>
+                                        <![CDATA[
+                                        //get the config table from the Project and get DeployTypes from the Project
+                                        //if they are not set, default them to the DeployTypes of the ParametrisationHelper Thing
+                                        
+                                        var confTables =  Projects[project].GetConfigurationTables();
+                                        if(!confTables || !confTables.Find({name: 'DeployConfigParametrisation'}) ){// the required ConfTables don't exist -> have to create them
+                                        	Projects[project].AddConfigurationTableDefinition({
+                                                isMultiRow: true /* BOOLEAN */,
+                                                name: 'DeployConfigParametrisation' /* STRING */,
+                                                description: 'Set of Configurations that must be applied after a deployment' /* STRING */,
+                                                category: 'DeployConfig' /* STRING */,
+                                                dataShapeName: 'PTC.SC.SP.DeployConfigParametrisationDataShape' /* DATASHAPENAME */,
+                                                ordinal: '1' /* INTEGER */,
+                                                isHidden: false /* BOOLEAN */
+                                            });
+                                        }
+                                        
+                                        let newEntries =  DataShapes["PTC.SC.SP.DeployConfigParametrisationDataShape"].CreateValues();
+                                        let result = Projects[project].GetConfigurationTable({tableName: 'DeployConfigParametrisation'});
+                                        result =  Resources["InfoTableFunctions"].Clone({t1: result});
+                                        let deployTypes = ["Dev","Int","Prod"];
+                                        try{ 
+                                            deployTypes = Things["PTC.SC.SP.SolutionParametrisationHelperThing"].GetConfigurationTable({tableName: 'DeployConfigSetup' }).DeployTypes.split(','); 
+                                        }catch(e){
+                                            logger.info("Error getting DeployTypes from PTC.SC.SP.SolutionParametrisationHelperThing configuration. Using default [Dev, Int, Prod]. Error: "+e);
+                                        }
+                                        const author = Resources["CurrentSessionInfo"].GetCurrentUser();
+                                        const now = new Date();
+                                        
+                                        // Get Properties of category 'DeployConfig' first
+                                        const pDefs =  Things[thing].GetPropertyDefinitions({category: 'DeployConfig',});
+                                        for(let i=0; i<pDefs.rows.length; i++){
+                                            let pName = pDefs.rows[i].name;
+                                            let baseType = pDefs.rows[i].baseType;
+                                            let value = Things[thing][pName];
+                                            for(let ii=0; ii<deployTypes.length; ii++){
+                                        		let newRow={
+                                                	DeployType: deployTypes[ii], 
+                                                    Thing: thing,
+                                                    ConfigType: 'Property',
+                                                    ConfigTableName:'',
+                                                    PropertyName: pName,
+                                                    PropertyBaseType: baseType,
+                                                    //Author handling: if a different user added/extracted the same property before, the rows for both users will be kepr, producing a duplicate entry that must be cleaned out manually!
+                                                    Author: author,
+                                                    Project: project
+                                                };
+                                                if(!result.Find(newRow)){
+                                                    newRow.PropertyBaseType = pDefs.rows[i].baseType;
+                                                    newRow.Value = baseType=='PASSWORD' && encryptionKey ? Resources["EncryptionServices"].EncryptWithCustomKey({data: value, key: encryptionKey}) : value;
+                                                    newRow.Timestamp = now;
+                                                    result.AddRow(newRow);
+                                                }        
+                                            }
+                                        }
+                                        const cts = Things[thing].GetConfigurationTables();
+                                        for(let i=0;i<cts.rows.length;i++){
+                                            let ct_n = cts.rows[i].name;
+                                            let ct_d = Things[thing].GetConfigurationTableDefinition({tableName: ct_n});
+                                            if(ct_d.isHidden) continue;
+                                            //TODO: add support for MultiRow tables and subsystems for e.g. FederationSubsystem config
+                                            if(ct_d.isMultiRow) continue; //most of the time these are not target system specific! This assumption must be validated though!
+                                            let ct = Things[thing].GetConfigurationTable({tableName: ct_n});
+                                            var dataShapeFields = ct.dataShape.fields;
+                                            for (var fieldName in dataShapeFields) {
+                                                let baseType = dataShapeFields[fieldName].baseType;
+                                                let value = ct[fieldName];
+                                                for(let ii=0; ii<deployTypes.length; ii++){
+                                        			let newRow={
+                                                        DeployType: deployTypes[ii], 
+                                                        Thing: thing,
+                                                        ConfigType: 'Configuration',
+                                                        ConfigTableName: ct_n,
+                                                        PropertyName: fieldName,
+                                                    	PropertyBaseType: baseType,
+                                                        //Author handling: if a different user added/extracted the same property before, the rows for both users will be kepr, producing a duplicate entry that must be cleaned out manually!
+                                                        Author: author,
+                                                        Project: project
+                                                    };
+                                                    if(!result.Find(newRow)){
+                                                        newRow.PropertyBaseType = baseType;
+                                                        newRow.Value = baseType=='PASSWORD' && encryptionKey ? Resources["EncryptionServices"].EncryptWithCustomKey({data: value, key: encryptionKey}) : value;
+                                                        newRow.Timestamp = now;
+                                                        result.AddRow(newRow);
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        
+                                        Projects[project].SetMultiRowConfigurationTable({
+                                        	configurationTable: result /* INFOTABLE */,
+                                        	persistent: true /* BOOLEAN */,
+                                        	tableName: 'DeployConfigParametrisation' /* STRING */
+                                        });
+                                        ]]>
+                                        </code>
+                                    </Row>
+                                </Rows>
+                            </ConfigurationTable>
+                        </ConfigurationTables>
+                    </ServiceImplementation>
+                    <ServiceImplementation
+                     description=""
+                     handlerName="Script"
+                     name="GenerateKey">
+                        <ConfigurationTables>
+                            <ConfigurationTable
+                             description=""
+                             isMultiRow="false"
+                             name="Script"
+                             ordinal="0">
+                                <DataShape>
+                                    <FieldDefinitions>
+                                        <FieldDefinition
+                                         baseType="STRING"
+                                         description="code"
+                                         name="code"
+                                         ordinal="0"></FieldDefinition>
+                                    </FieldDefinitions>
+                                </DataShape>
+                                <Rows>
+                                    <Row>
+                                        <code>
+                                        <![CDATA[
+                                        var result = Resources["EncryptionServices"].GenerateKey({size: 256});
+                                        ]]>
+                                        </code>
+                                    </Row>
+                                </Rows>
+                            </ConfigurationTable>
+                        </ConfigurationTables>
+                    </ServiceImplementation>
+                    <ServiceImplementation
+                     description=""
+                     handlerName="Script"
+                     name="GetDeployTypes">
+                        <ConfigurationTables>
+                            <ConfigurationTable
+                             description=""
+                             isMultiRow="false"
+                             name="Script"
+                             ordinal="0">
+                                <DataShape>
+                                    <FieldDefinitions>
+                                        <FieldDefinition
+                                         baseType="STRING"
+                                         description="code"
+                                         name="code"
+                                         ordinal="0"></FieldDefinition>
+                                    </FieldDefinitions>
+                                </DataShape>
+                                <Rows>
+                                    <Row>
+                                        <code>
+                                        <![CDATA[
+                                        let dts = me.GetConfigurationTable({tableName: 'DeployConfigSetup'}).DeployTypes.split(",");
+                                        var result = DataShapes.EntityList.CreateValues();
+                                        for(var i=0; i<dts.length; i++){
+                                            result.AddRow({name: dts[i]});
+                                        }
+                                        ]]>
+                                        </code>
+                                    </Row>
+                                </Rows>
+                            </ConfigurationTable>
+                        </ConfigurationTables>
+                    </ServiceImplementation>
+                    <ServiceImplementation
+                     description=""
+                     handlerName="Script"
+                     name="GetMyDeployType">
+                        <ConfigurationTables>
+                            <ConfigurationTable
+                             description=""
+                             isMultiRow="false"
+                             name="Script"
+                             ordinal="0">
+                                <DataShape>
+                                    <FieldDefinitions>
+                                        <FieldDefinition
+                                         baseType="STRING"
+                                         description="code"
+                                         name="code"
+                                         ordinal="0"></FieldDefinition>
+                                    </FieldDefinitions>
+                                </DataShape>
+                                <Rows>
+                                    <Row>
+                                        <code>
+                                        <![CDATA[
+                                        var result = me.GetConfigurationTable({tableName: 'DeployConfigSetup'}).MyDeployType;
+                                        ]]>
+                                        </code>
+                                    </Row>
+                                </Rows>
+                            </ConfigurationTable>
+                        </ConfigurationTables>
+                    </ServiceImplementation>
+                    <ServiceImplementation
+                     description=""
+                     handlerName="Script"
+                     name="GetProjectDecryptedConfiguration">
+                        <ConfigurationTables>
+                            <ConfigurationTable
+                             description=""
+                             isMultiRow="false"
+                             name="Script"
+                             ordinal="0">
+                                <DataShape>
+                                    <FieldDefinitions>
+                                        <FieldDefinition
+                                         baseType="STRING"
+                                         description="code"
+                                         name="code"
+                                         ordinal="0"></FieldDefinition>
+                                    </FieldDefinitions>
+                                </DataShape>
+                                <Rows>
+                                    <Row>
+                                        <code>
+                                        <![CDATA[
+                                        var result = DataShapes["PTC.SC.SP.DeployConfigParametrisationDataShape"].CreateValues();
+                                        logger.debug("DeployType: "+DeployType);
+                                        //let result = Resources.InfoTableFunctions.Clone({t1:me.DeploymentProperties});
+                                        if(projects && projects.rows && projects.rows.length>0){
+                                            for(let ii=0; ii<projects.rows.length; ii++){
+                                                let project = projects.rows[ii].name;
+                                                let result2;
+                                                try{
+                                                    result2 = Projects[project].GetConfigurationTable({tableName: 'DeployConfigParametrisation'});
+                                                }catch(e){ //skipping projects w/o config -> this is the most likely reason for an issue here
+                                                	logger.info("Skipping project: "+project+" for reason: "+e);
+                                                    continue;
+                                                }
+                                                if(result2 && result2.rows && result2.rows.length>0 ) for(let i=0; i<result2.rows.length; i++){
+                                                    let row = result2.rows[i];
+                                                    if(DeployType && DeployType != row.DeployType) continue;
+                                                    if(row.PropertyBaseType==='PASSWORD'){
+                                                        logger.info("Before Encrypting in project: "+project+" with new value: "+row.Value);
+                                                        row.Value = encryptionKey ? Resources["EncryptionServices"].DecryptWithCustomKey({encryptedData: row.Value, key: encryptionKey}) : row.Value;
+                                                        logger.info("After Encrypting in project: "+project+" with new value: "+row.Value);
+                                                    }
+                                                    row.Project = project;
+                                                    result.AddRow(row);
+                                                }
+                                            }
+                                        }
+                                        
+                                        result = Resources["InfoTableFunctions"].Query({ t: result, query: query});
+                                        ]]>
+                                        </code>
+                                    </Row>
+                                </Rows>
+                            </ConfigurationTable>
+                        </ConfigurationTables>
+                    </ServiceImplementation>
+                    <ServiceImplementation
+                     description=""
+                     handlerName="Script"
+                     name="SaveChanges">
+                        <ConfigurationTables>
+                            <ConfigurationTable
+                             description=""
+                             isMultiRow="false"
+                             name="Script"
+                             ordinal="0">
+                                <DataShape>
+                                    <FieldDefinitions>
+                                        <FieldDefinition
+                                         baseType="STRING"
+                                         description="code"
+                                         name="code"
+                                         ordinal="0"></FieldDefinition>
+                                    </FieldDefinitions>
+                                </DataShape>
+                                <Rows>
+                                    <Row>
+                                        <code>
+                                        <![CDATA[
+                                        //figure out what changed 
+                                        //	get current config of all  
+                                        //encrypt pwds
+                                        //and save new config table
+                                        var entries = editedEntries || DataShapes['PTC.SC.SP.DeployConfigParametrisationDataShape'].CreateValues();
+                                        logger.debug("editedEntries: "+editedEntries+" - "+editedEntries.ToJSON());
+                                        
+                                        var projects = Resources["InfoTableFunctions"].Distinct({t: entries,columns: 'Project'});
+                                        logger.debug("projects: "+projects+" - "+projects.ToJSON());
+                                        const author = Resources["CurrentSessionInfo"].GetCurrentUser();
+                                        const now = new Date();
+                                        for(let i=0; i<projects.rows.length;i++){
+                                        	let project = projects.rows[i].Project;
+                                            let conf =  Projects[project].GetConfigurationTable({tableName: 'DeployConfigParametrisation'});
+                                            //update or add edited & added entries
+                                            let projEntries = Resources["InfoTableFunctions"].Clone({t1: entries});
+                                            projEntries.Filter({Project:project});
+                                            for(let j=0; j<projEntries.rows.length; j++){
+                                                let pe = projEntries.rows[j];
+                                                conf.Delete({DeployType: pe.DeployType,Thing: pe.Thing, ConfigTableName: pe.ConfigTableName, PropertyName: pe.PropertyName, ConfigType: pe.ConfigType, Project: pe.Project});
+                                                pe.Author=author;//overwrite author and timestamp but keep the rest of the new entry from the edited table
+                                                pe.Timestamp=now;
+                                                //re-encrypt password for edited/added rows
+                                                pe.Value = pe.PropertyBaseType=='PASSWORD' && encryptionKey ? Resources["EncryptionServices"].EncryptWithCustomKey({data: pe.Value, key: encryptionKey}) : pe.Value;
+                                                logger.debug("update row: "+pe);
+                                                conf.AddRow(pe);
+                                            }
+                                            Projects[project].SetMultiRowConfigurationTable({
+                                                configurationTable: conf /* INFOTABLE */,
+                                                persistent: true /* BOOLEAN */,
+                                                tableName: 'DeployConfigParametrisation' /* STRING */
+                                            });
+                                        }
+                                        ]]>
+                                        </code>
+                                    </Row>
+                                </Rows>
+                            </ConfigurationTable>
+                        </ConfigurationTables>
+                    </ServiceImplementation>
+                    <ServiceImplementation
+                     description=""
+                     handlerName="Script"
+                     name="SearchProjects">
+                        <ConfigurationTables>
+                            <ConfigurationTable
+                             description=""
+                             isMultiRow="false"
+                             name="Script"
+                             ordinal="0">
+                                <DataShape>
+                                    <FieldDefinitions>
+                                        <FieldDefinition
+                                         baseType="STRING"
+                                         description="code"
+                                         name="code"
+                                         ordinal="0"></FieldDefinition>
+                                    </FieldDefinitions>
+                                </DataShape>
+                                <Rows>
+                                    <Row>
+                                        <code>
+                                        <![CDATA[
+                                        var params = {
+                                        	maxItems: undefined /* NUMBER */,
+                                        	searchExpression: expression /* STRING */,
+                                        	types: {"items": ["Project"]} /* JSON */,
+                                        	withPermissions: undefined /* BOOLEAN */,
+                                        	endDate: undefined /* DATETIME */,
+                                        	aspects: undefined /* JSON */,
+                                        	excludedAspects: undefined /* JSON */,
+                                        	tags: undefined /* TAGS */,
+                                        	thingTemplates: undefined /* JSON */,
+                                        	searchDescriptions: true /* BOOLEAN */,
+                                        	thingShapes: undefined /* JSON */,
+                                        	sortBy: 'name' /* STRING */,
+                                        	isAscending: true /* BOOLEAN */,
+                                        	projectName: undefined /* PROJECTNAME */,
+                                        	maxSearchItems: undefined /* NUMBER */,
+                                        	startDate: undefined /* DATETIME */
+                                        };
+                                        
+                                        // result: INFOTABLE dataShape: SpotlightSearch
+                                        var result = Resources["SearchFunctions"].SpotlightSearch(params);
+                                        ]]>
+                                        </code>
+                                    </Row>
+                                </Rows>
+                            </ConfigurationTable>
+                        </ConfigurationTables>
+                    </ServiceImplementation>
+                </ServiceImplementations>
+                <Subscriptions></Subscriptions>
+            </ThingShape>
+            <PropertyBindings></PropertyBindings>
+            <RemotePropertyBindings></RemotePropertyBindings>
+            <RemoteServiceBindings></RemoteServiceBindings>
+            <RemoteEventBindings></RemoteEventBindings>
+            <AlertConfigurations></AlertConfigurations>
+            <ImplementedShapes></ImplementedShapes>
+            <ThingProperties></ThingProperties>
+        </Thing>
+    </Things>
+</Entities>

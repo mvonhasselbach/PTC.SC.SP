@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Entities
+ build="b222"
+ majorVersion="8"
+ minorVersion="5"
+ modelPersistenceProviderPackage="PostgresPersistenceProviderPackage"
+ revision="4"
+ schemaVersion="1053"
+ universal="password">
+    <Projects>
+        <Project
+         artifactId=""
+         dependsOn="{&quot;extensions&quot;:&quot;&quot;,&quot;projects&quot;:&quot;&quot;}"
+         description=""
+         documentationContent=""
+         groupId=""
+         homeMashup=""
+         lastModifiedDate="2021-01-14T12:15:12.511Z"
+         minPlatformVersion=""
+         name="PTC.SC.SP.SolutionParametrisationProject"
+         packageVersion="1.0.0"
+         projectName="PTC.SC.SP.SolutionParametrisationProject"
+         publishResult=""
+         state="DRAFT"
+         tags="">
+            <avatar></avatar>
+            <DesignTimePermissions>
+                <Create></Create>
+                <Read></Read>
+                <Update></Update>
+                <Delete></Delete>
+                <Metadata></Metadata>
+            </DesignTimePermissions>
+            <RunTimePermissions></RunTimePermissions>
+            <VisibilityPermissions>
+                <Visibility></Visibility>
+            </VisibilityPermissions>
+            <ConfigurationTableDefinitions></ConfigurationTableDefinitions>
+            <ConfigurationTables></ConfigurationTables>
+        </Project>
+    </Projects>
+</Entities>

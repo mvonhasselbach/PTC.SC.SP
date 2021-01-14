@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Entities
+ build="b222"
+ majorVersion="8"
+ minorVersion="5"
+ modelPersistenceProviderPackage="PostgresPersistenceProviderPackage"
+ revision="4"
+ schemaVersion="1053"
+ universal="password">
+    <DataShapes>
+        <DataShape
+         baseDataShape=""
+         description=""
+         documentationContent=""
+         homeMashup=""
+         lastModifiedDate="2021-01-14T12:15:12.501Z"
+         name="PTC.SC.SP.DeployConfigSetupDataShape"
+         projectName="PTC.SC.SP.SolutionParametrisationProject"
+         tags="">
+            <avatar></avatar>
+            <DesignTimePermissions>
+                <Create></Create>
+                <Read></Read>
+                <Update></Update>
+                <Delete></Delete>
+                <Metadata></Metadata>
+            </DesignTimePermissions>
+            <RunTimePermissions></RunTimePermissions>
+            <VisibilityPermissions>
+                <Visibility></Visibility>
+            </VisibilityPermissions>
+            <ConfigurationTableDefinitions></ConfigurationTableDefinitions>
+            <ConfigurationTables></ConfigurationTables>
+            <FieldDefinitions>
+                <FieldDefinition
+                 aspect.isPrimaryKey="true"
+                 baseType="STRING"
+                 description="comma-separated list of Deployment Types or target systems that need a different set of configuration values, e.g. Dev,Test,Prod"
+                 name="DeployTypes"
+                 ordinal="1"></FieldDefinition>
+                <FieldDefinition
+                 aspect.isPrimaryKey="false"
+                 baseType="STRING"
+                 description=""
+                 name="MyDeployType"
+                 ordinal="2"></FieldDefinition>
+            </FieldDefinitions>
+        </DataShape>
+    </DataShapes>
+</Entities>
