@@ -9,18 +9,18 @@
  universal="password">
     <Projects>
         <Project
-         artifactId=""
+         artifactId="solution-parametrisation-helper"
          dependsOn="{&quot;extensions&quot;:&quot;&quot;,&quot;projects&quot;:&quot;&quot;}"
-         description=""
+         description="This is a helper package that allows to extract and deploy configuration parameters from Things. In the extract phase, you can copy configuration parameters and thing properties marked with the 'DeployConfig' category to a configuration table on a Project and if desired encrypt passwords with your own, private key.  "
          documentationContent=""
-         groupId=""
+         groupId="ptc.sc"
          homeMashup=""
-         lastModifiedDate="2021-01-14T12:15:12.511Z"
-         minPlatformVersion=""
+         lastModifiedDate="2021-02-25T12:25:39.418Z"
+         minPlatformVersion="8.5.4"
          name="PTC.SC.SP.SolutionParametrisationProject"
          packageVersion="1.0.0"
          projectName="PTC.SC.SP.SolutionParametrisationProject"
-         publishResult=""
+         publishResult="{&quot;publishResult&quot;:{&quot;packagedVersion&quot;:&quot;&quot;,&quot;publishedVersion&quot;:&quot;&quot;,&quot;publishedAt&quot;:0,&quot;message&quot;:&quot;Package Failed : Package Solution failed with : null&quot;,&quot;version&quot;:&quot;1.0.0&quot;,&quot;packagedAt&quot;:0,&quot;statusCode&quot;:500,&quot;status&quot;:&quot;Failed&quot;}}"
          state="DRAFT"
          tags="">
             <avatar></avatar>
