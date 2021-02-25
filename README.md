@@ -17,7 +17,7 @@ Process
 
 ## User interface
 
-![](img\SolutionParametrisationHelper0.png)
+![](img/SolutionParametrisationHelper0.png)
 
 ## Extract configurations
 
