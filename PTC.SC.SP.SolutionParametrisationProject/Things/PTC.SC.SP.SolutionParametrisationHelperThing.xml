@@ -351,10 +351,9 @@
                                         <![CDATA[
                                         //get relevant projects
                                         projects = ApplyToAllProjects ? Resources["SearchFunctions"].SpotlightSearch({types: {"items": ["Project"]} }) : projects;
-                                        DeployType = DeployType ? me.GetConfigurationTable({tableName: 'DeployConfigSetup'}).MyDeployType : DeployType;
+                                        DeployType = DeployType || me.GetConfigurationTable({tableName: 'DeployConfigSetup'}).MyDeployType;
                                         //get project-specific configs
                                         var result = DataShapes["PTC.SC.SP.DeployConfigParametrisationDataShape"].CreateValues();
-                                        //let result = Resources.InfoTableFunctions.Clone({t1:me.DeploymentProperties});
                                         if(projects && projects.rows && projects.rows.length>0){
                                             for(let ii=0; ii<projects.rows.length; ii++){
                                                 try{
@@ -367,8 +366,7 @@
                                             }
                                         }
                                         logger.debug("Apply these Configs: "+result.ToJSON());
-                                        //let result = Resources.InfoTableFunctions.Clone({t1:me.DeploymentProperties});
-                                        //result.Filter({DeployType:DeployType});
+                                        result.Filter({DeployType:DeployType});
                                         
                                         for(let i=0; i<result.rows.length; i++){
                                             let row = result.rows[i];

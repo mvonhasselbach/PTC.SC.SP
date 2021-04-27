@@ -109,6 +109,6 @@ Configuration of the target system deploy type and list of available deploy type
 
 * Support for multi-row configurations, e.g. _AuthorizationServerScopesSettings_
 * Support for Subsystems (e.g.FederationSubsystem) and Media Entities (Media Proxy)
-* SolutionCentralcapability that allows to mark a target system with the system type
+* SolutionCentral capability that allows to mark a target system with the system type
   * This could be added as a Platform setting and then resolved TWX-side alternatively
 
