@@ -377,6 +377,7 @@
                                         			value = encryptionKey ? Resources["EncryptionServices"].DecryptWithCustomKey({encryptedData: value, key: encryptionKey}) : value;
                                         			value = Resources["EncryptionServices"].EncryptPropertyValue({data: value}); 
                                                 }
+                                                if(row.PropertyBaseType==='INFOTABLE') value =  Resources["InfoTableFunctions"].FromJSON({json: JSON.parse(value)});
                                                 Things[thing][row.PropertyName] = value;
                                             }
                                             if(row.ConfigType==='Configuration'){
@@ -511,6 +512,8 @@
                                             let pName = pDefs.rows[i].name;
                                             let baseType = pDefs.rows[i].baseType;
                                             let value = Things[thing][pName];
+                                            if(baseType=='PASSWORD' && encryptionKey) value = Resources["EncryptionServices"].EncryptWithCustomKey({data: value, key: encryptionKey});
+                                            if(baseType=='INFOTABLE') value = value.ToJSON();
                                             for(let ii=0; ii<deployTypes.length; ii++){
                                         		let newRow={
                                                 	DeployType: deployTypes[ii], 
@@ -525,7 +528,7 @@
                                                 };
                                                 if(!result.Find(newRow)){
                                                     newRow.PropertyBaseType = pDefs.rows[i].baseType;
-                                                    newRow.Value = baseType=='PASSWORD' && encryptionKey ? Resources["EncryptionServices"].EncryptWithCustomKey({data: value, key: encryptionKey}) : value;
+                                                    newRow.Value = value;
                                                     newRow.Timestamp = now;
                                                     result.AddRow(newRow);
                                                 }        
@@ -543,6 +546,8 @@
                                             for (var fieldName in dataShapeFields) {
                                                 let baseType = dataShapeFields[fieldName].baseType;
                                                 let value = ct[fieldName];
+                                                if(baseType=='PASSWORD' && encryptionKey) value = Resources["EncryptionServices"].EncryptWithCustomKey({data: value, key: encryptionKey});
+                                                if(baseType=='INFOTABLE') value = value.ToJSON();
                                                 for(let ii=0; ii<deployTypes.length; ii++){
                                         			let newRow={
                                                         DeployType: deployTypes[ii], 
@@ -557,7 +562,7 @@
                                                     };
                                                     if(!result.Find(newRow)){
                                                         newRow.PropertyBaseType = baseType;
-                                                        newRow.Value = baseType=='PASSWORD' && encryptionKey ? Resources["EncryptionServices"].EncryptWithCustomKey({data: value, key: encryptionKey}) : value;
+                                                        newRow.Value = value;
                                                         newRow.Timestamp = now;
                                                         result.AddRow(newRow);
                                                     }
@@ -774,11 +779,16 @@
                                             projEntries.Filter({Project:project});
                                             for(let j=0; j<projEntries.rows.length; j++){
                                                 let pe = projEntries.rows[j];
+                                                //re-encrypt password for edited/added rows
+                                                if(pe.PropertyBaseType=='PASSWORD' && encryptionKey) pe.Value = Resources["EncryptionServices"].EncryptWithCustomKey({data: pe.Value, key: encryptionKey});
+                                                //handle weird zero width spaces that are added on prop value edit - right now for InfoTable props only but this may be a general problem in fact!
+                                                if(pe.PropertyBaseType=='INFOTABLE'){
+                                                    pe.Value = pe.Value.replace(/\u200B/g, "");
+                                                    logger.debug("fixed zero-length blank: "+pe.Value);
+                                                }
                                                 conf.Delete({DeployType: pe.DeployType,Thing: pe.Thing, ConfigTableName: pe.ConfigTableName, PropertyName: pe.PropertyName, ConfigType: pe.ConfigType, Project: pe.Project});
                                                 pe.Author=author;//overwrite author and timestamp but keep the rest of the new entry from the edited table
                                                 pe.Timestamp=now;
-                                                //re-encrypt password for edited/added rows
-                                                pe.Value = pe.PropertyBaseType=='PASSWORD' && encryptionKey ? Resources["EncryptionServices"].EncryptWithCustomKey({data: pe.Value, key: encryptionKey}) : pe.Value;
                                                 logger.debug("update row: "+pe);
                                                 conf.AddRow(pe);
                                             }
