@@ -94,7 +94,7 @@ curl --location --request POST 'https://abc.def.com/Thingworx/Things/Solutio
 
 ## How it is done
 
-![](img/SolutionParametrisationHelper6.png" width=800px />
+![](img/SolutionParametrisationHelper6.png)
 
 The __SolutionParametrisationHelper__ Thing has a couple of javascript-based services that are used in the __SolutionParametrisationMashup__ that provides the Admin UI. 
 The services can also be invoked through REST calls for deployment automation
